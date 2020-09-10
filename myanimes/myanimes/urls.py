@@ -16,6 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from anime.views import AnimeView
+from user.views import UsuarioView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('usuarios/', UsuarioView.as_view({'get': 'get', 'post': 'create'}), name='usuarios/'),
+    path('animes/<int:cd_usuario>/', AnimeView.as_view({'get': 'list', 'post': 'create'}), name='usuarios/'),
 ]

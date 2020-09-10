@@ -5,7 +5,7 @@ from rest_framework import serializers
 from user.models import Usuario
 
 
-class UsuarioListSerializer(serializers.Serializer):
+class UsuarioListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Usuario
@@ -16,19 +16,22 @@ class UsuarioListSerializer(serializers.Serializer):
         )
 
 
-class UsuarioCreateSerializer(serializers.Serializer):
+class UsuarioCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Usuario
         fields = (
             'ds_email',
-            'nm_usuario',
-            'ds_senha'
+            'nm_usuario'
         )
 
     def validate(self, data):
-        if Usuario.objects.filter(ds_email=data['ds_email']) > 0:
+        print(data)
+        if Usuario.objects.filter(ds_email=data['ds_email']).count() > 0:
             raise serializers.ValidationError({"ds_email": "Esse e-mail já está cadastrado em nossa base de dados."})
+
+        return data
+
 
     @transaction.atomic
     def create(self, validated_data):
