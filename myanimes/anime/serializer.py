@@ -14,6 +14,7 @@ class AnimeListSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'nm_anime',
+            'ds_anime',
             'ie_assistido',
             'ie_favorito',
             'cd_usuario'
@@ -26,7 +27,19 @@ class AnimeCreateSerializer(serializers.ModelSerializer):
         model = Anime
         fields = (
             'nm_anime',
+            'ds_anime',
             'ie_assistido',
             'ie_favorito',
             'cd_usuario'
+        )
+
+class AnimeUpdadeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Anime
+        fields = (
+            'nm_anime',
+            'ds_anime',
+            'ie_assistido',
+            'ie_favorito',
         )

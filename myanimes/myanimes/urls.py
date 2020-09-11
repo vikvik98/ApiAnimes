@@ -22,5 +22,6 @@ from user.views import UsuarioView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('usuarios/', UsuarioView.as_view({'get': 'get', 'post': 'create'}), name='usuarios/'),
-    path('animes/<int:cd_usuario>/', AnimeView.as_view({'get': 'list', 'post': 'create'}), name='usuarios/'),
+    path('animes/<int:cd_usuario>/', AnimeView.as_view({'get': 'list', 'post': 'create'}), name='animes/cd_usuario/'),
+    path('animes/anime/<int:cd_anime>/', AnimeView.as_view({'get': 'retrive', 'delete': 'destroy', 'patch': 'partial_updade'}), name='animes/anime/cd_anime/'),
 ]

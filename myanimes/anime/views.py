@@ -1,12 +1,12 @@
 from django.http import Http404
 from django.shortcuts import render
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 
 # Create your views here.
 from rest_framework.response import Response
 
 from anime.models import Anime
-from anime.serializer import AnimeListSerializer, AnimeCreateSerializer
+from anime.serializer import AnimeListSerializer, AnimeCreateSerializer, AnimeUpdadeSerializer
 
 
 class AnimeView(viewsets.ViewSet):
@@ -28,7 +28,7 @@ class AnimeView(viewsets.ViewSet):
         serializer = AnimeListSerializer(instances, many=True)
         return Response(serializer.data)
 
-    def detail(self, request, cd_anime, *args, **kwargs):
+    def retrive(self, request, cd_anime, *args, **kwargs):
         instance = self.get_object(cd_anime)
         serializer = AnimeListSerializer(instance)
         return Response(serializer.data)
@@ -37,4 +37,16 @@ class AnimeView(viewsets.ViewSet):
         serializer = AnimeCreateSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+    def destroy(self, request, cd_anime, *args, **kwargs):
+        instance = self.get_object(cd_anime)
+        instance.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def partial_updade(self, request, cd_anime, *args, **kwargs):
+        instance = self.get_object(cd_anime)
+        serializer = AnimeUpdadeSerializer(instance, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
