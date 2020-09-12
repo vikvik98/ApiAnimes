@@ -1,1 +1,1 @@
-web: gunicorn apianimeteste.wsgi
+web: gunicorn myanimes.wsgi
