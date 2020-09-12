@@ -1,4 +1,4 @@
-#!C:\Users\a7par\Downloads\vini\ApiAnime\ApiAnimes\myanimes\venv\Scripts\python.exe
+#!C:\Users\vinic\Programacao\ApiAnimes\myanimes\venv\Scripts\python.exe
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 

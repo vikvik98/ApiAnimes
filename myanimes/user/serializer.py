@@ -18,6 +18,7 @@ class UsuarioListSerializer(serializers.ModelSerializer):
 
 class UsuarioCreateSerializer(serializers.ModelSerializer):
 
+
     class Meta:
         model = Usuario
         fields = (
@@ -35,6 +36,7 @@ class UsuarioCreateSerializer(serializers.ModelSerializer):
 
     @transaction.atomic
     def create(self, validated_data):
+        print(validated_data)
         usuario = Usuario(ds_email=validated_data['ds_email'], nm_usuario=validated_data['nm_usuario'])
         user = User(
             email=validated_data['ds_email'],

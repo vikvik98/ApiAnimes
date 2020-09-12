@@ -33,7 +33,8 @@ class AnimeView(viewsets.ViewSet):
         serializer = AnimeListSerializer(instance)
         return Response(serializer.data)
 
-    def create(self, request, *args, **kwargs):
+    def create(self, request, cd_usuario, *args, **kwargs):
+        request.data["cd_usuario"] = cd_usuario
         serializer = AnimeCreateSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
